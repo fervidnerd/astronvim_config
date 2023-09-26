@@ -69,6 +69,18 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
+    local vimrcgroup = vim.api.nvim_create_augroup('vimrc', { clear = true })
+
+    vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+      pattern = '*.cs',
+      group = vimrcgroup,
+      command = 'set shiftwidth=8',
+    })
+    vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+      pattern = '*.cs',
+      group = vimrcgroup,
+      command = 'set expandtab',
+    })
     -- Set up custom filetypes
     -- vim.filetype.add {
     --   extension = {
