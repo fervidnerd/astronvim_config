@@ -11,7 +11,7 @@ return {
       "yaml",
       "go",
       "gomod",
-      "gowork"
+      "gowork",
     })
   end,
 }

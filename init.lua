@@ -81,6 +81,13 @@ return {
       group = vimrcgroup,
       command = 'set expandtab',
     })
+    vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+      pattern = {"*.go"},
+      callback = function() 
+        vim.cmd("set colorcolumn=80")
+        vim.cmd("set tabstop=8")
+      end,
+    })
     -- Set up custom filetypes
     -- vim.filetype.add {
     --   extension = {
