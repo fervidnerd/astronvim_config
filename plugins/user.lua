@@ -16,7 +16,7 @@ return {
     event = "User AstroFile",
     cmd = { "TodoQuickFix" },
     keys = {
-      { "<leader>T", "<cmd>TodoTelescope<cr>", desc = "Open TODOs in Telescope" },
+      { "<leader>D", "<cmd>TodoTelescope<cr>", desc = "Open TODOs in Telescope" },
     },
   },
   {
@@ -30,4 +30,34 @@ return {
       vim.keymap.set("i", "<c-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
     end,
   },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-go"
+    },
+    config = function()
+      local neotest_ns = vim.api.nvim_create_namespace("neotest")
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message =
+              diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
+      require("neotest").setup({
+        adapters = {
+          require("neotest-go"),
+        }
+      })
+    end,
+    keys = {
+      { "<leader>T", "", desc = "Run Tests"},
+      { "<leader>Tt", "<cmd>lua require('neotest').run.run()<cr>", desc = "Run Current Test" },
+      { "<leader>Tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Test Current File" },
+    }
+  }
 }
