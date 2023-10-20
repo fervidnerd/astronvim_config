@@ -86,6 +86,9 @@ return {
       callback = function() 
         vim.cmd("set colorcolumn=80")
         vim.cmd("set tabstop=8")
+        vim.cmd("set shiftwidth=8")
+        vim.cmd("set noexpandtab")
+        vim.cmd("set softtabstop=8")
       end,
     })
     -- Set up custom filetypes
