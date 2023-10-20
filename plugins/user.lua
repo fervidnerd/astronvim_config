@@ -31,6 +31,16 @@ return {
     end,
   },
   {
+    "leoluz/nvim-dap-go",
+    config = function()
+      require("dap-go").setup()
+    end,
+    keys = {
+      { "<leader>Td", "<cmd>lua require('dap-go').debug_test()<cr>", desc = "Debug Test" },
+      { "<leader>Tf", "<cmd>lua require('dap-go').debug_last_test()<cr>", desc = "Debug Last Test" },
+    }
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -60,7 +70,6 @@ return {
       { "<leader>Tt", "<cmd>lua require('neotest').run.run()<cr>", desc = "Run Current Test" },
       { "<leader>TA", "<cmd>lua require('neotest').run.run(vim.fn.getcwd())<cr>", desc = "Run All Tests"},
       { "<leader>Tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Test Current File" },
-      { "<leader>Td", "<cmd>lua require('neotest').run.run({ strategy = 'dap' })<cr>", desc = "Debug Test Current File" },
       { "<leader>Ts" , "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Toggle Summary" },
       { "<leader>Tj", "<cmd>lua require('neotest').jump.next({ status = 'failed' })<cr>", desc = "Next Failed Test" },
       { "<leader>TJ", "<cmd>lua require('neotest').jump.prev({ status = 'failed' })<cr>", desc = "Previous Failed Test" },
@@ -70,7 +79,6 @@ return {
       { "<leader>TP", "<cmd>lua require('neotest').jump.prev({ status = 'passed' })<cr>", desc = "Previous Passed Test" },
       { "<leader>To", "<cmd>lua require('neotest').output.open({ enter = true, auto_close = true })<cr>", desc = "Open Test Output" },
       { "<leader>Tl", "<cmd>lua require('neotest').run.run_last()<cr>", desc = "Run Last Test" },
-      { "<leader>Tf", "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", desc = "Debug Last Test" },
       { "<leader>Te", "<cmd>lua require('neotest').run.stop()<cr>", desc = "Stop Test" },
       { "<leader>Ta", "<cmd>lua require('neotest').run.attach()<cr>", desc = "Attach Test" },
     }
