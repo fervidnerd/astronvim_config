@@ -23,8 +23,8 @@ return {
         "csharpier",
         "goimports",
         "sqlfmt",
-        -- "prettier",
-        -- "stylua",
+        "prettier",
+        "stylua",
       })
     end,
   },

@@ -18,7 +18,7 @@ return {
   },
 
   -- Set colorscheme to use
-  colorscheme = "astrodark",
+  colorscheme = "tokyonight",
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
@@ -69,26 +69,36 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    local vimrcgroup = vim.api.nvim_create_augroup('vimrc', { clear = true })
+    local vimrcgroup = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
-    vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-      pattern = '*.cs',
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+      pattern = "*.cs",
       group = vimrcgroup,
-      command = 'set shiftwidth=8',
+      command = "set shiftwidth=8",
     })
-    vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-      pattern = '*.cs',
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+      pattern = "*.cs",
       group = vimrcgroup,
-      command = 'set expandtab',
+      command = "set expandtab",
     })
-    vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-      pattern = {"*.go"},
-      callback = function() 
-        vim.cmd("set colorcolumn=80")
-        vim.cmd("set tabstop=8")
-        vim.cmd("set shiftwidth=8")
-        vim.cmd("set noexpandtab")
-        vim.cmd("set softtabstop=8")
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+      pattern = { "*.go" },
+      callback = function()
+        vim.cmd "set colorcolumn=80"
+        vim.cmd "set tabstop=8"
+        vim.cmd "set shiftwidth=8"
+        vim.cmd "set noexpandtab"
+        vim.cmd "set softtabstop=8"
+      end,
+    })
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+      pattern = { "*.ts", "*.tsx", "*.jsx", "*.js" },
+      callback = function()
+        vim.cmd "set colorcolumn=80"
+        vim.cmd "set tabstop=2"
+        vim.cmd "set shiftwidth=2"
+        vim.cmd "set expandtab"
+        vim.cmd "set softtabstop=2"
       end,
     })
     -- Set up custom filetypes
