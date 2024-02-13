@@ -9,4 +9,12 @@ return {
   { import = "astrocommunity.git.neogit" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+  {
+    import = "astrocommunity.project.project-nvim",
+    opts = {
+      detection_methods = { "pattern", "manual" },
+      patterns = { "go.mod", "package.json" },
+      silent_chdir = false,
+    },
+  },
 }

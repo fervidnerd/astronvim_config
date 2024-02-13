@@ -18,7 +18,7 @@ return {
     --   desc = "Previous buffer",
     -- },
 
-    ["<leader>T"] = { name="Run Tests" },
+    ["<leader>T"] = { name = "Run Tests" },
     -- mappings seen under group name "Buffer"
     ["<leader>bD"] = {
       function()
@@ -27,6 +27,10 @@ return {
         )
       end,
       desc = "Pick to close",
+    },
+    ["<leader>fp"] = {
+      "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
+      desc = "Find Projects",
     },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus

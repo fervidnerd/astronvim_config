@@ -54,12 +54,20 @@ return {
   },
   {
     "nvim-neotest/neotest",
+    ft = "go",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-go",
     },
-    config = function()
+    opts = function()
+      return {
+        adapters = {
+          require "neotest-go",
+        },
+      }
+    end,
+    config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace "neotest"
       vim.diagnostic.config({
         virtual_text = {
@@ -69,8 +77,7 @@ return {
           end,
         },
       }, neotest_ns)
-      ---@diagnostic disable-next-line: missing-fields
-      require("neotest").setup { adapters = { require "neotest-go" } }
+      require("neotest").setup(opts)
     end,
     keys = {
       { "<leader>T", "", desc = "Run Tests" },
@@ -81,7 +88,7 @@ return {
       },
       {
         "<leader>TA",
-        "<cmd>lua require('neotest').run.run(vim.fn.getcwd())<cr>",
+        "<cmd>lua require('neotest').run.run(vim.fn.expand('%:p:h'))<cr>",
         desc = "Run All Tests",
       },
       {
@@ -128,6 +135,11 @@ return {
         "<leader>To",
         "<cmd>lua require('neotest').output.open({ enter = true, auto_close = true })<cr>",
         desc = "Open Test Output",
+      },
+      {
+        "<leader>TO",
+        "<cmd>lua require('neotest').output_panel.toggle({ enter = true, auto_close = true })<cr>",
+        desc = "Toggle Test Output Panel",
       },
       {
         "<leader>Tl",
